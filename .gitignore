@@ -93,6 +93,7 @@ dist
 
 # Serverless directories
 .serverless/
+.build/
 
 # FuseBox cache
 .fusebox/
@@ -102,3 +103,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace

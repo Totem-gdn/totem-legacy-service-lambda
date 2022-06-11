@@ -1,0 +1,6 @@
+{
+  "Variables": {
+    "MONGODB_URI": "",
+    "MONGODB_DATABASE": ""
+  }
+}

@@ -1,0 +1,69 @@
+service: totem-legacy-service-lambda
+
+package:
+  excludeDevDependencies: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+params:
+  default:
+    iamRoleName: iam-totem-legacy-service-lambda
+    MONGODB_URI: mongodb://user:pass@localhost:27017
+    MONGODB_DATABASE: achievements
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    MONGODB_URI: ${param:MONGODB_URI}
+    MONGODB_DATABASE: ${param:MONGODB_DATABASE}
+  iam:
+    role: totemLegacyServiceLambdaIAMRole
+
+functions:
+  Achievements:
+    handler: src/achievements.handler
+    events:
+      - http:
+          path: /achievements/{itemId}
+          method: get
+          request:
+            parameters:
+              paths:
+                itemId: true
+      - http:
+          path: /achievements/{itemId}/{gameId}
+          method: get
+          request:
+            parameters:
+              paths:
+                itemId: true
+                gameId: true
+      - http:
+          path: /achievements/{itemId}/{gameId}
+          method: post
+          request:
+            parameters:
+              paths:
+                itemId: true
+                gameId: true
+
+resources:
+  Resources:
+    totemLegacyServiceLambdaIAMRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /
+        RoleName: ${param:iamRoleName}
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
