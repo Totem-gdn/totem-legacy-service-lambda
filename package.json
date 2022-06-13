@@ -2,7 +2,7 @@
   "name": "legacy-service",
   "version": "1.0.0",
   "description": "legacy service aws lambda functions",
-  "main": "src/achievements.ts",
+  "main": "index.ts",
   "scripts": {
     "start": "serverless offline start",
     "package": "serverless package --package dist"

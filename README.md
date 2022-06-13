@@ -43,7 +43,7 @@ aws iam attach-role-policy --role-name {NAME_OF_ROLE} --policy-arn arn:aws:iam::
 Since our lambda function requires an environment variables so edit a file called environment.json in aws-data folder with your mongo db credentials. And run the following script:
 
 ```bash
-aws lambda create-function --function-name {FUNCTION_NAME} --runtime nodejs14.x --zip-file fileb://dist/legacy-service-api.zip --handler src/achievements.handler --environment file://aws-data/environment.json --role "arn:aws:iam::{YOUR_ACCOUNT_NUMBER}:role/{NAME_OF_ROLE}"
+aws lambda create-function --function-name {FUNCTION_NAME} --runtime nodejs14.x --zip-file fileb://dist/totem-legacy-service-lambda.zip --handler index.handler --environment file://aws-data/environment.json --role "arn:aws:iam::{YOUR_ACCOUNT_NUMBER}:role/{NAME_OF_ROLE}"
 ```
 
 ## GET-request Examples:

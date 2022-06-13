@@ -19,7 +19,12 @@ export async function handler(event: HttpEvent<{ itemId: string, gameId?: string
             if (!event.body) {
                 return respondJson(400, 'Please Provide Body')
             }
-            await createAchievement(event.pathParameters.itemId, event.pathParameters.gameId, event.body)
+            let body = event.body;
+            // dirty hack, "thanks" to API Gateway that provides body as base64 encoded
+            if (Buffer.from(event.body, 'base64').toString('base64') === event.body) {
+                body = Buffer.from(event.body, 'base64').toString('utf8');
+            }
+            await createAchievement(event.pathParameters.itemId, event.pathParameters.gameId, body)
             return respondJson(201, 'Created');
         default:
             return respondJson(405, 'Method Not Allowed')

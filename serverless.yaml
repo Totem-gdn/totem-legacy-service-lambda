@@ -24,9 +24,17 @@ provider:
 
 functions:
   LegacyServiceLambda:
-    handler: src/achievements.handler
+    handler: index.handler
     events:
-      - httpApi: '*'
+      - httpApi:
+          method: 'GET'
+          path: /{itemId}
+      - httpApi:
+          method: 'GET'
+          path: /{itemId}/{gameId}
+      - httpApi:
+          method: 'POST'
+          path: /{itemId}/{gameId}
 
 resources:
   Resources:

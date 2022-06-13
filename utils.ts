@@ -1,4 +1,4 @@
-import {ProxyResult} from "aws-lambda";
+import {HttpResponseBody} from "./types";
 
 export function stringify(value: unknown): string {
     switch (typeof value) {
@@ -10,7 +10,7 @@ export function stringify(value: unknown): string {
     }
 }
 
-export function respondJson(statusCode: number, body: unknown): ProxyResult {
+export function respondJson(statusCode: number, body: unknown): HttpResponseBody {
     return {
         statusCode,
         body: stringify(body)
