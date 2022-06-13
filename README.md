@@ -45,3 +45,16 @@ Since our lambda function requires an environment variables so edit a file calle
 ```bash
 aws lambda create-function --function-name {FUNCTION_NAME} --runtime nodejs14.x --zip-file fileb://dist/legacy-service-api.zip --handler src/achievements.handler --environment file://aws-data/environment.json --role "arn:aws:iam::{YOUR_ACCOUNT_NUMBER}:role/{NAME_OF_ROLE}"
 ```
+
+## GET-request Examples:
+
+```bash
+# Get all records by Item ID
+curl {DOMAIN_URL}/achievements/{itemId}
+# Get all records by Item ID and Game ID
+curl {DOMAIN_URL}/achievements/{itemId}/{gameId}
+# Add new record by Item ID and Game ID
+curl -X POST \
+     -d '000000000000000000000000000000000000000000000000000000000000000000000000000000' \
+     {DOMAIN_URL}/achievements/{itemId}/{gameId}
+```

@@ -8,7 +8,7 @@ export async function handler(event: HttpEvent<{ itemId: string, gameId?: string
         return respondJson(400, 'Please Provide Item ID')
     }
     context.callbackWaitsForEmptyEventLoop = false;
-    switch (event.httpMethod) {
+    switch (event.requestContext.http.method) {
         case 'GET':
             const achievements = await getAchievements(event.pathParameters.itemId, event.pathParameters.gameId);
             return respondJson(200, {achievements});

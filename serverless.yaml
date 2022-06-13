@@ -23,32 +23,10 @@ provider:
     role: totemLegacyServiceLambdaIAMRole
 
 functions:
-  Achievements:
+  LegacyServiceLambda:
     handler: src/achievements.handler
     events:
-      - http:
-          path: /achievements/{itemId}
-          method: get
-          request:
-            parameters:
-              paths:
-                itemId: true
-      - http:
-          path: /achievements/{itemId}/{gameId}
-          method: get
-          request:
-            parameters:
-              paths:
-                itemId: true
-                gameId: true
-      - http:
-          path: /achievements/{itemId}/{gameId}
-          method: post
-          request:
-            parameters:
-              paths:
-                itemId: true
-                gameId: true
+      - httpApi: '*'
 
 resources:
   Resources:

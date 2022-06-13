@@ -1,8 +1,8 @@
-import {APIGatewayEvent, ProxyResult} from "aws-lambda";
+import {APIGatewayProxyEventV2, APIGatewayProxyResultV2} from "aws-lambda";
 
-export type HttpEvent<T = null> = Omit<APIGatewayEvent, 'pathParameters'> & { pathParameters: T }
+export type HttpEvent<T = null> = Omit<APIGatewayProxyEventV2, 'pathParameters'> & { pathParameters: T }
 
-export type HttpResponse = Promise<ProxyResult>
+export type HttpResponse = Promise<APIGatewayProxyResultV2>
 
 export type Record = {
     itemId: string;
